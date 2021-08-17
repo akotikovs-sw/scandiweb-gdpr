@@ -1,0 +1,55 @@
+type Mutation {
+    deleteCustomer(customerPassword: String!): customerResponse @resolver(class: "\\Scandiweb\\GdprScandiPWA\\Controller\\Customer\\AddDeleteRequest")
+    anonymiseCustomerData(customerPassword: String!): customerResponse @resolver(class: "\\Scandiweb\\GdprScandiPWA\\Controller\\Customer\\Anonymise")
+    getCustomerData(customerPassword: String!): customerDataResponse @resolver(class: "\\Scandiweb\\GdprScandiPWA\\Controller\\Customer\\DownloadCsv")
+    updateConsents(consentUpdates: [consentUpdateInput]!, area: String): Boolean @resolver(class: "\\Scandiweb\\GdprScandiPWA\\Controller\\Consent\\UpdateConsents")
+}
+
+type Query {
+    getPrivacyInformation: privacyInformation @resolver(class: "\\Scandiweb\\GdprScandiPWA\\Controller\\Consent\\GetPrivacyInformation")
+}
+
+extend input CustomerInput {
+    privacyConsentSelection: [consentUpdateInput]!
+}
+
+input consentUpdateInput {
+    code: String!
+    accept: Boolean!
+}
+
+type privacyInformation {
+    consents: sitePrivacyConsents
+    privacyPolicy: String
+}
+
+type sitePrivacyConsents  {
+    registration: [privacyConsent]
+    checkout: [privacyConsent]
+    contactus: [privacyConsent]
+    subscription: [privacyConsent]
+}
+
+type privacyConsent {
+    name: String
+    code: String
+    id: ID
+    isRequired: Boolean
+    isAgreed: Boolean
+    text: String
+}
+
+type customerResponse {
+    result: Boolean!
+    message: String
+}
+
+type customerDataResponse {
+    result: [customerData]
+    message: String
+}
+
+type customerData {
+    key: String
+    value: String
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ ScandiPWA - Progressive Web App for Magento
+  ~
+  ~ Copyright © Scandiweb, Inc. All rights reserved.
+  ~ See LICENSE for license details.
+  ~
+  ~ @license OSL-3.0 (Open Software License ("OSL") v. 3.0)
+  ~ @package scandiweb/gdpr-scandipwa
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\Gdpr\Controller\Customer\AddDeleteRequest"
+                type="Scandiweb\GdprScandiPWA\Controller\Customer\AddDeleteRequest" />
+    <preference for="Amasty\Gdpr\Controller\Customer\Anonymise"
+                type="Scandiweb\GdprScandiPWA\Controller\Customer\Anonymise" />
+    <preference for="Amasty\Gdpr\Controller\Customer\DownloadCsv"
+                type="Scandiweb\GdprScandiPWA\Controller\Customer\DownloadCsv" />
+    <preference for="ScandiPWA\CustomerGraphQl\Model\Customer\GetCustomer"
+                type="Scandiweb\GdprScandiPWA\Model\Customer\GetCustomer" />
+    <preference for="ScandiPWA\CustomerGraphQl\Model\Resolver\GenerateCustomerToken"
+                type="Scandiweb\GdprScandiPWA\Model\Resolver\GenerateCustomerToken" />
+    <type name="Magento\CustomerGraphQl\Model\Customer\CreateCustomerAccount">
+        <plugin name="consentSaver" type="Scandiweb\GdprScandiPWA\Model\Resolver\CreateCustomerConsentSaver" sortOrder="1" disabled="false" />
+    </type>
+</config>

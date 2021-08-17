@@ -1,0 +1,20 @@
+{
+    "name": "scandiweb/gdpr-scandipwa",
+    "description": "Amasty GDPR integration for ScandiPWA",
+    "type": "library",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name": "Aivars Arbidans",
+            "email": "info@scandiweb.com"
+        },
+        {
+            "name": "Reinis Mazeiks",
+            "email": "info@scandiweb.com"
+        }
+    ],
+    "require": {
+        "scandipwa/source": "dev-3.x-dev",
+        "amasty/module-gdpr": "^2.0"
+    }
+}
